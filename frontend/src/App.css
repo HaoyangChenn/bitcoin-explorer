@@ -1,0 +1,58 @@
+/* Global container style using Flexbox to center content */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Vertically center the content on the page */
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+/* Title style */
+.title {
+  font-size: 3rem;
+  color: #333;
+}
+
+/* Block height text style */
+.block-height {
+  font-size: 2.5rem;
+  margin-top: 20px;
+}
+
+/* Loading text style */
+.loading {
+  font-size: 1.5rem;
+  color: gray;
+}
+
+/* Shiny gold number effect */
+.gold-number {
+  color: gold;
+  font-weight: bold;
+  animation: shine 1.5s infinite alternate;
+}
+
+/* Shine animation */
+@keyframes shine {
+  0% {
+      filter: brightness(100%);
+      transform: scale(1);
+  }
+  50% {
+      filter: brightness(150%);
+      transform: scale(1.05);
+  }
+  100% {
+      filter: brightness(200%);
+      transform: scale(1.1);
+  }
+}
+
+/* Date display style */
+.date {
+  font-size: 1.5rem;
+  color: #666;
+  margin-top: 20px;
+}
