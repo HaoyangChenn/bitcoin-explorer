@@ -6,18 +6,17 @@ import reportWebVitals from './reportWebVitals';
 
 const rootElement = document.getElementById('root');
 
-if (rootElement) {
-  const root = ReactDOM.createRoot(rootElement);
-  root.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  );
-
-  // If you want to start measuring performance in your app, pass a function
-  // to log results (for example: reportWebVitals(console.log))
-  // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-  reportWebVitals();
-} else {
-  console.error('Root element not found');
+if (!rootElement) {
+  throw new Error('Root element not found');
 }
+
+const root = ReactDOM.createRoot(rootElement);
+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// Optional: Measure performance in your app. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals(console.log);

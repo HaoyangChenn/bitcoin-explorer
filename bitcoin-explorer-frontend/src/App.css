@@ -1,23 +1,23 @@
 .App {
   text-align: center;
-  background-color: #2e2e2e; /* 灰色背景 */
-  color: #ffffff; /* 白色文字 */
+  background-color: #2e2e2e; /* Gray background */
+  color: #ffffff; /* White text */
   min-height: 100vh;
   font-family: 'Orbitron', sans-serif;
 }
 
 .App-header {
-  background-color: #3a3a3a; /* 深灰色背景 */
+  background-color: #3a3a3a; /* Dark gray background */
   padding: 20px;
-  color: #ffffff; /* 白色文字 */
-  border-bottom: 2px solid #ffffff; /* 白色边框 */
+  color: #ffffff; /* White text */
+  border-bottom: 2px solid #ffffff; /* White border */
 }
 
 h1 {
   font-size: 3em;
   margin: 0;
-  color: #ffffff; /* 白色文字 */
-  text-shadow: 0 0 10px #ffffff; /* 白色发光效果 */
+  color: #ffffff; /* White text */
+  text-shadow: 0 0 10px #ffffff; /* White glow effect */
 }
 
 .content {
@@ -30,10 +30,10 @@ h1 {
 .right-side {
   flex: 1;
   margin: 10px;
-  background-color: #3a3a3a; /* 深灰色背景 */
+  background-color: #3a3a3a; /* Dark gray background */
   padding: 20px;
-  border: 2px solid #ffffff; /* 白色边框 */
-  box-shadow: 0 0 20px #ffffff; /* 白色发光效果 */
+  border: 2px solid #ffffff; /* White border */
+  box-shadow: 0 0 20px #ffffff; /* White glow effect */
   display: flex;
   flex-direction: column;
 }
@@ -45,20 +45,20 @@ h1 {
 .data-box h2 {
   font-size: 1.5em;
   margin-bottom: 10px;
-  color: #ffffff; /* 白色文字 */
-  text-shadow: 0 0 5px #ffffff; /* 白色发光效果 */
+  color: #ffffff; /* White text */
+  text-shadow: 0 0 5px #ffffff; /* White glow effect */
 }
 
 .data-box p {
   font-size: 1em;
   margin: 5px 0;
-  color: #ffffff; /* 白色文字 */
+  color: #ffffff; /* White text */
 }
 
 .price {
   font-size: 2.5em;
-  color: #ffffff; /* 白色文字 */
-  text-shadow: 0 0 10px #ffffff; /* 白色发光效果 */
+  color: #ffffff; /* White text */
+  text-shadow: 0 0 10px #ffffff; /* White glow effect */
 }
 
 .chart-container {
@@ -70,24 +70,24 @@ h1 {
 .chart-container h2 {
   font-size: 1.5em;
   margin-bottom: 10px;
-  color: #ffffff; /* 白色文字 */
-  text-shadow: 0 0 5px #ffffff; /* 白色发光效果 */
+  color: #ffffff; /* White text */
+  text-shadow: 0 0 5px #ffffff; /* White glow effect */
 }
 
 .chart-container canvas {
   max-width: 100%;
   flex: 1;
-  background-color: #2e2e2e; /* 灰色背景 */
-  border: 2px solid #ffffff; /* 白色边框 */
-  box-shadow: 0 0 20px #ffffff; /* 白色发光效果 */
+  background-color: #2e2e2e; /* Gray background */
+  border: 2px solid #ffffff; /* White border */
+  box-shadow: 0 0 20px #ffffff; /* White glow effect */
 }
 
 p {
-  color: #ffffff; /* 白色文字 */
+  color: #ffffff; /* White text */
 }
 
 a {
-  color: #ffffff; /* 白色文字 */
+  color: #ffffff; /* White text */
   text-decoration: none;
 }
 
