@@ -1,22 +1,23 @@
 .App {
   text-align: center;
-  background-color: #0f0f0f;
-  color: #00ffea;
+  background-color: #2e2e2e; /* 灰色背景 */
+  color: #ffffff; /* 白色文字 */
   min-height: 100vh;
   font-family: 'Orbitron', sans-serif;
 }
 
 .App-header {
-  background-color: #1a1a1a;
+  background-color: #3a3a3a; /* 深灰色背景 */
   padding: 20px;
-  color: #00ffea;
-  border-bottom: 2px solid #00ffea;
+  color: #ffffff; /* 白色文字 */
+  border-bottom: 2px solid #ffffff; /* 白色边框 */
 }
 
 h1 {
   font-size: 3em;
   margin: 0;
-  text-shadow: 0 0 10px #00ffea;
+  color: #ffffff; /* 白色文字 */
+  text-shadow: 0 0 10px #ffffff; /* 白色发光效果 */
 }
 
 .content {
@@ -29,10 +30,10 @@ h1 {
 .right-side {
   flex: 1;
   margin: 10px;
-  background-color: #1a1a1a;
+  background-color: #3a3a3a; /* 深灰色背景 */
   padding: 20px;
-  border: 2px solid #00ffea;
-  box-shadow: 0 0 20px #00ffea;
+  border: 2px solid #ffffff; /* 白色边框 */
+  box-shadow: 0 0 20px #ffffff; /* 白色发光效果 */
   display: flex;
   flex-direction: column;
 }
@@ -44,18 +45,20 @@ h1 {
 .data-box h2 {
   font-size: 1.5em;
   margin-bottom: 10px;
-  text-shadow: 0 0 5px #00ffea;
+  color: #ffffff; /* 白色文字 */
+  text-shadow: 0 0 5px #ffffff; /* 白色发光效果 */
 }
 
 .data-box p {
   font-size: 1em;
   margin: 5px 0;
+  color: #ffffff; /* 白色文字 */
 }
 
 .price {
   font-size: 2.5em;
-  color: #ff00ff;
-  text-shadow: 0 0 10px #ff00ff;
+  color: #ffffff; /* 白色文字 */
+  text-shadow: 0 0 10px #ffffff; /* 白色发光效果 */
 }
 
 .chart-container {
@@ -67,23 +70,24 @@ h1 {
 .chart-container h2 {
   font-size: 1.5em;
   margin-bottom: 10px;
-  text-shadow: 0 0 5px #00ffea;
+  color: #ffffff; /* 白色文字 */
+  text-shadow: 0 0 5px #ffffff; /* 白色发光效果 */
 }
 
 .chart-container canvas {
   max-width: 100%;
   flex: 1;
-  background-color: #0f0f0f;
-  border: 2px solid #00ffea;
-  box-shadow: 0 0 20px #00ffea;
+  background-color: #2e2e2e; /* 灰色背景 */
+  border: 2px solid #ffffff; /* 白色边框 */
+  box-shadow: 0 0 20px #ffffff; /* 白色发光效果 */
 }
 
 p {
-  color: #00ffea;
+  color: #ffffff; /* 白色文字 */
 }
 
 a {
-  color: #00ffea;
+  color: #ffffff; /* 白色文字 */
   text-decoration: none;
 }
 
