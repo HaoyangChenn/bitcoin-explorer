@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 import { Line } from 'react-chartjs-2';
@@ -39,31 +39,31 @@ const App: React.FC = () => {
   const [bitcoinPrice, setBitcoinPrice] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const fetchData = useCallback(async () => {
-    try {
-      const [blockResponse, marketResponse, networkResponse] = await Promise.all([
-        axios.get(`${process.env.REACT_APP_API_URL}/latest-block`),
-        axios.get(`${process.env.REACT_APP_API_URL}/market-data`),
-        axios.get(`${process.env.REACT_APP_API_URL}/network-data`),
-      ]);
-
-      setLatestBlock(blockResponse.data);
-      setMarketData(marketResponse.data);
-      setNetworkData(networkResponse.data);
-
-      if (marketResponse.data.length > 0) {
-        const latestMarketPoint = marketResponse.data[marketResponse.data.length - 1];
-        setBitcoinPrice(latestMarketPoint.price_usd);
-      }
-
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      setLoading(false);
-    }
-  }, []);
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [blockResponse, marketResponse, networkResponse] = await Promise.all([
+          axios.get('http://localhost:3001/latest-block'),
+          axios.get('http://localhost:3001/market-data'),
+          axios.get('http://localhost:3001/network-data'),
+        ]);
+
+        setLatestBlock(blockResponse.data);
+        setMarketData(marketResponse.data);
+        setNetworkData(networkResponse.data);
+
+        if (marketResponse.data.length > 0) {
+          const latestMarketPoint = marketResponse.data[marketResponse.data.length - 1];
+          setBitcoinPrice(latestMarketPoint.price_usd);
+        }
+
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
+    };
+
     fetchData();
 
     const interval = setInterval(() => {
@@ -71,7 +71,47 @@ const App: React.FC = () => {
     }, 10000);
 
     return () => clearInterval(interval);
-  }, [fetchData]);
+  }, []);
+
+  const hashRateDifficultyChartData = {
+    labels: networkData.map(point => point.timestamp),
+    datasets: [
+      {
+        label: 'Hash Rate',
+        data: networkData.map(point => point.hash_rate),
+        borderColor: '#00ffea',
+        backgroundColor: 'rgba(0, 255, 234, 0.2)',
+        yAxisID: 'y',
+      },
+      {
+        label: 'Difficulty',
+        data: networkData.map(point => point.difficulty),
+        borderColor: '#ff00ff',
+        backgroundColor: 'rgba(255, 0, 255, 0.2)',
+        yAxisID: 'y1',
+      },
+    ],
+  };
+
+  const priceVolumeChartData = {
+    labels: marketData.map(point => point.timestamp),
+    datasets: [
+      {
+        label: 'Price (USD)',
+        data: marketData.map(point => point.price_usd),
+        borderColor: '#00ffea',
+        backgroundColor: 'rgba(0, 255, 234, 0.2)',
+        yAxisID: 'y',
+      },
+      {
+        label: 'Volume (USD)',
+        data: marketData.map(point => point.volume_usd),
+        borderColor: '#ff00ff',
+        backgroundColor: 'rgba(255, 0, 255, 0.2)',
+        yAxisID: 'y1',
+      },
+    ],
+  };
 
   const commonChartOptions = {
     responsive: true,
@@ -125,59 +165,13 @@ const App: React.FC = () => {
     },
   };
 
-  const hashRateDifficultyChartData = {
-    labels: networkData.map(point => point.timestamp),
-    datasets: [
-      {
-        label: 'Hash Rate',
-        data: networkData.map(point => point.hash_rate),
-        borderColor: '#00ffea',
-        backgroundColor: 'rgba(0, 255, 234, 0.2)',
-        yAxisID: 'y',
-      },
-      {
-        label: 'Difficulty',
-        data: networkData.map(point => point.difficulty),
-        borderColor: '#ff00ff',
-        backgroundColor: 'rgba(255, 0, 255, 0.2)',
-        yAxisID: 'y1',
-      },
-    ],
+  const hashRateDifficultyChartOptions = {
+    ...commonChartOptions,
   };
 
-  const priceVolumeChartData = {
-    labels: marketData.map(point => point.timestamp),
-    datasets: [
-      {
-        label: 'Price (USD)',
-        data: marketData.map(point => point.price_usd),
-        borderColor: '#00ffea',
-        backgroundColor: 'rgba(0, 255, 234, 0.2)',
-        yAxisID: 'y',
-      },
-      {
-        label: 'Volume (USD)',
-        data: marketData.map(point => point.volume_usd),
-        borderColor: '#ff00ff',
-        backgroundColor: 'rgba(255, 0, 255, 0.2)',
-        yAxisID: 'y1',
-      },
-    ],
+  const priceVolumeChartOptions = {
+    ...commonChartOptions,
   };
-
-  const DataBox: React.FC<{ title: string, children: React.ReactNode }> = ({ title, children }) => (
-    <div className="data-box">
-      <h2>{title}</h2>
-      {children}
-    </div>
-  );
-
-  const ChartContainer: React.FC<{ title: string, data: any, options: any }> = ({ title, data, options }) => (
-    <div className="chart-container">
-      <h2>{title}</h2>
-      <Line data={data} options={options} />
-    </div>
-  );
 
   return (
     <div className="App">
@@ -190,21 +184,29 @@ const App: React.FC = () => {
         ) : (
           <>
             <div className="left-side">
-              <DataBox title="Latest Block Information">
+              <div className="data-box">
+                <h2>Latest Block Information</h2>
                 <p><strong>Block Height:</strong> {latestBlock?.height}</p>
                 <p><strong>Block Hash:</strong> {latestBlock?.block_hash}</p>
                 <p><strong>Timestamp:</strong> {latestBlock?.timestamp}</p>
                 <p><strong>Transaction Count:</strong> {latestBlock?.tx_count}</p>
                 <p><strong>Size:</strong> {latestBlock?.size} bytes</p>
                 <p><strong>Weight:</strong> {latestBlock?.weight}</p>
-              </DataBox>
-              <ChartContainer title="Hash Rate and Difficulty Trends" data={hashRateDifficultyChartData} options={commonChartOptions} />
+              </div>
+              <div className="chart-container">
+                <h2>Hash Rate and Difficulty Trends</h2>
+                <Line data={hashRateDifficultyChartData} options={hashRateDifficultyChartOptions} />
+              </div>
             </div>
             <div className="right-side">
-              <DataBox title="Current Bitcoin Price">
+              <div className="data-box">
+                <h2>Current Bitcoin Price</h2>
                 <p className="price">${bitcoinPrice?.toLocaleString()}</p>
-              </DataBox>
-              <ChartContainer title="Price and Volume Trends" data={priceVolumeChartData} options={commonChartOptions} />
+              </div>
+              <div className="chart-container">
+                <h2>Price and Volume Trends</h2>
+                <Line data={priceVolumeChartData} options={priceVolumeChartOptions} />
+              </div>
             </div>
           </>
         )}
