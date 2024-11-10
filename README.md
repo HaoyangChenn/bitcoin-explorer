@@ -15,34 +15,46 @@ To install Bitcoin Explorer, follow these steps:
 
 1. Clone the repository:
   ```sh
-  git clone https://github.com/yourusername/bitcoin-explorer.git
+  git clone https://github.com/HaoyangChenn/bitcoin-explorer
   ```
 2. Navigate to the project directory:
   ```sh
   cd bitcoin-explorer
   ```
-3. Install the dependencies:
-  ```sh
-  npm install
-  ```
+## Build and Run with Docker Compose
 
-## Usage
+To build and start all the services (backend, frontend, and PostgreSQL database) using Docker Compose, run the following command:
 
-To start the application, run:
-```sh
-npm start
+```bash
+docker-compose up --build
 ```
 
-Open your browser and navigate to `http://localhost:3000` to start exploring the Bitcoin blockchain.
+### This command will:
 
-## Contributing
+1. Build the backend Docker image and start the backend service.
+2. Build the frontend Docker image and start the frontend service.
+3. Pull the PostgreSQL image, initialize the database with `init.sql`, and start the database service.
 
-We welcome contributions! Please read our [contributing guidelines](CONTRIBUTING.md) for more information.
+### Access the Application
+
+Once all the services are up and running, you can access the application in your web browser at:
+
+- Frontend: [http://localhost:8080](http://localhost:8080)
+- Backend API: [http://localhost:3001](http://localhost:3001)
+
+### Stopping the Services
+
+To stop the running services, press `Ctrl+C` in the terminal where `docker-compose` is running, or run:
+
+```bash
+docker-compose down
+```
+
+## Additional Information
+
+- Ensure Docker and Docker Compose are up-to-date.
+- Make sure any environment variables required by the backend, frontend, or database services are configured in a `.env` file if needed.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-For any questions or feedback, please open an issue on GitHub.
+This project is licensed under the MIT License.
